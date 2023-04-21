@@ -1,0 +1,143 @@
+<mvc:View
+    controllerName="com.tr.smartcontrol.controller.View1"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+	xmlns="sap.m"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:f="sap.f"
+	xmlns:l="sap.ui.layout"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:AnalyticalTable="sap.ui.table">
+	<Shell appWidthLimited="false">
+		<App id="app">
+			<pages>
+				<Page  title="{i18n>title}" showHeader="false" class="sapUiSizeCompact">
+					<content>
+						<VBox fitContainer="true">
+							<smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="UniqueAndStablePersistencyKey"
+			                        considerSelectionVariants="true" entitySet="C_TRIALBALANCEResults" showClearButton="true">
+								<smartFilterBar:controlConfiguration>
+									<smartFilterBar:ControlConfiguration key="P_FromPostingDate" index="0" label="Posting Date From" groupId="_BASIC"  visibleInAdvancedArea="true" mandatory="mandatory">
+										<smartFilterBar:customControl>
+                                            <DatePicker id="idFromDate" displayFormat="dd/MM/yyyy" valueFormat="yyyy-MM-dd"/>
+										</smartFilterBar:customControl>
+									</smartFilterBar:ControlConfiguration>
+                                    <smartFilterBar:ControlConfiguration key="P_ToPostingDate" index="1" label="Posting Date To" groupId="_BASIC"  visibleInAdvancedArea="true" mandatory="mandatory">
+										<smartFilterBar:customControl>
+                                            <DatePicker id="idToDate" displayFormat="dd/MM/yyyy" valueFormat="yyyy-MM-dd"/>
+										</smartFilterBar:customControl>
+									</smartFilterBar:ControlConfiguration>
+								</smartFilterBar:controlConfiguration>
+                                <smartFilterBar:layoutData>
+					                <FlexItemData shrinkFactor="0"/>
+				                </smartFilterBar:layoutData>
+							</smartFilterBar:SmartFilterBar>
+							<smartTable:SmartTable id="smartTable" entitySet="C_TRIALBALANCEResults" enableAutoBinding="true" smartFilterId="smartFilterBar" tableType="AnalyticalTable" 
+			                    useExportToExcel="true" useVariantManagement="true" showVariantManagement="true" useTablePersonalisation="true" header="Line Items" showRowCount="true" showFullScreenButton="true"
+                                beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" class="sapUiResponsiveContentPadding"
+                                requestAtLeastFields="CompanyCode,GLAccount,GLAccountHierarchyName,StartingBalanceAmtInCoCodeCrcy,DebitAmountInCoCodeCrcy,CreditAmountInCoCodeCrcy,EndingBalanceAmtInCoCodeCrcy,CompanyCodeCurrency,ChartOfAccounts">
+								<AnalyticalTable:AnalyticalTable id="idAnalyticalTable" selectionMode="None"/>
+							<!--Table id="idTrialBalanceTable" alternateRowColors="true" inset="false" sticky="ColumnHeaders"
+                                     growing="true" growingThreshold="20" growingScrollToLoad="true">
+									<columns>
+                                        <Column id="idColumnCompanyCode" minScreenWidth="Tablet" demandPopin="true">
+											<customData>
+											    <core:CustomData key="p13nData"
+														value='\{"columnKey": "CompanyCode","columnIndex":"1","leadingProperty":"CompanyCode", "sortProperty": "CompanyCode", "filterProperty": "CompanyCode"}'/>
+												</customData>
+											<Label text="CompanyCode" />
+										</Column>
+                                        <Column id="idColumnCOA" minScreenWidth="Tablet" demandPopin="true">
+											<customData>
+											    <core:CustomData key="p13nData"
+														value='\{"columnKey": "CompanyCode","columnIndex":"2","leadingProperty":"CompanyCode", "sortProperty": "CompanyCode", "filterProperty": "CompanyCode"}'/>
+												</customData>
+											<Label text="Chart Of Account" />
+										</Column>
+                                        <Column id="idColumnGLAccount" minScreenWidth="Tablet" demandPopin="true">
+											<customData>
+											    <core:CustomData key="p13nData"
+														value='\{"columnKey": "GLAccount","columnIndex":"3","leadingProperty":"GLAccount", "sortProperty": "GLAccount", "filterProperty": "GLAccount"}'/>
+												</customData>
+											<Label text="GLAccount" />
+										</Column>
+                                        <Column id="idColumnGLAccountHierarchyName" minScreenWidth="Tablet" demandPopin="true">
+											<customData>
+											    <core:CustomData key="p13nData"
+														value='\{"columnKey": "GLAccountHierarchyName","columnIndex":"4","leadingProperty":"GLAccountHierarchyName", "sortProperty": "GLAccountHierarchyName", "filterProperty": "GLAccountHierarchyName"}'/>
+												</customData>
+											<Label text="GLAssignmentNo" />
+										</Column>
+
+                                        <Column id="idColumnStartingBalanceAmtInCoCodeCrcy" minScreenWidth="Tablet" demandPopin="true">
+											<customData>
+											    <core:CustomData key="p13nData"
+														value='\{"columnKey": "StartingBalanceAmtInCoCodeCrcy","columnIndex":"5","leadingProperty":"StartingBalanceAmtInCoCodeCrcy", "sortProperty": "StartingBalanceAmtInCoCodeCrcy", "filterProperty": "StartingBalanceAmtInCoCodeCrcy"}'/>
+												</customData>
+											<Label text="StartingBalance" />
+										</Column>
+                                        <Column id="idColumnDebitAmountInCoCodeCrcy" minScreenWidth="Tablet" demandPopin="true">
+											<customData>
+											    <core:CustomData key="p13nData"
+														value='\{"columnKey": "DebitAmountInCoCodeCrcy","columnIndex":"6","leadingProperty":"DebitAmountInCoCodeCrcy", "sortProperty": "DebitAmountInCoCodeCrcy", "filterProperty": "DebitAmountInCoCodeCrcy"}'/>
+												</customData>
+											<Label text="DebitBalance" />
+										</Column>
+
+                                        <Column id="idColumnCreditAmountInCoCodeCrcy" minScreenWidth="Tablet" demandPopin="true">
+											<customData>
+											    <core:CustomData key="p13nData"
+														value='\{"columnKey": "CreditAmountInCoCodeCrcy","columnIndex":"7","leadingProperty":"CreditAmountInCoCodeCrcy", "sortProperty": "CreditAmountInCoCodeCrcy", "filterProperty": "CreditAmountInCoCodeCrcy"}'/>
+												</customData>
+											<Label text="CreditBalance" />
+										</Column>
+                                        <Column id="idColumnEndingBalanceAmtInCoCodeCrcy" minScreenWidth="Tablet" demandPopin="true">
+											<customData>
+											    <core:CustomData key="p13nData"
+														value='\{"columnKey": "EndingBalanceAmtInCoCodeCrcy","columnIndex":"8","leadingProperty":"EndingBalanceAmtInCoCodeCrcy", "sortProperty": "EndingBalanceAmtInCoCodeCrcy", "filterProperty": "EndingBalanceAmtInCoCodeCrcy"}'/>
+												</customData>
+											<Label text="EndingBalance" />
+										</Column>
+                                        <Column id="idColumnPostingDate" minScreenWidth="Tablet" demandPopin="true">
+											<customData>
+											    <core:CustomData key="p13nData"
+														value='\{"columnKey": "PostingDate","columnIndex":"9","leadingProperty":"PostingDate", "sortProperty": "PostingDate", "filterProperty": "PostingDate"}'/>
+												</customData>
+											<Label text="PostingDate" />
+										</Column>
+                                        
+									</columns>
+									<items>
+										<ColumnListItem vAlign="Middle" type="Active">
+											<cells>
+												<ObjectIdentifier text="{CompanyCode}-{CompanyCodeCurrency}"/>
+                                                <ObjectIdentifier text="{ChartOfAccounts}"/>
+												<ObjectIdentifier text="{GLAccount}"/>
+												<ObjectIdentifier text="{GLAccountHierarchyName}"/>
+												<ObjectIdentifier text="{StartingBalanceAmtInCoCodeCrcy}"/>
+												<ObjectIdentifier text="{DebitAmountInCoCodeCrcy}"/>
+												<ObjectIdentifier text="{CreditAmountInCoCodeCrcy}"/>
+												<ObjectIdentifier text="{EndingBalanceAmtInCoCodeCrcy}"/>
+                                                <ObjectIdentifier text="{PostingDate}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table-->
+                                <smartTable:layoutData>
+					                <FlexItemData growFactor="1" baseSize="0%"/>
+				                </smartTable:layoutData>
+							</smartTable:SmartTable>
+						</VBox>
+					</content>
+                    <footer>
+                    <OverflowToolbar>
+                        <ToolbarSpacer/>
+                        <Button text="Submit" type="Accept" press="onPressSubmit"/>
+                    </OverflowToolbar>
+                </footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
